@@ -179,7 +179,7 @@ public class TmNationController {
             httpMethod = "GET",
             response = TmNation.class,
             responseContainer = "Object")
-    public JsonResponse<List<TmNation>> getOnMyCache(@RequestParam(value = "accessToken", required = true) String accessToken, @PathVariable("nationId") Long nationId) {
+    public JsonResponse<List<TmNation>> find(@RequestParam(value = "accessToken", required = true) String accessToken, @PathVariable("nationId") Long nationId) {
         if (nationId == null) {
             return JsonResponse.fail("nationId: 必要参数");
         }
