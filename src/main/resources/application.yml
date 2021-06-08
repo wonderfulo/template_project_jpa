@@ -1,0 +1,27 @@
+server:
+  port: 8091
+  servlet:
+    context-path: /template    #项目前缀
+#  tomcat:
+#    basedir: D:\test_file2    #增加服务配置，自定义baseDir,  # 经测试无效，改为代码配置
+
+spring:
+  application:
+    name: template_project
+  profiles:
+#    include: datasource,mybatis,thymeleaf,file,redis
+    include: log
+    # 选择加载不同环境的配置文件 dev pre prod
+    active: dev
+  #mongodb配置
+#  data:
+#    mongodb:
+#      #      uri: mongodb://127.0.0.1:27017/mytest
+#      host: localhost
+#      port: 27017
+#      database: mytest
+#      username: cxy
+#      password: cxy
+#      authentication-database: mytest
+
+
