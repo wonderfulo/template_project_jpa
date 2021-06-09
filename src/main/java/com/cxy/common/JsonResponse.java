@@ -33,7 +33,7 @@ public class JsonResponse<T> {
      * @return
      */
     public static <T> JsonResponse<T> invalid() {
-        return fail(JsonResponseCodeEnum.INVAILD.getMsg());
+        return fail(JsonResponseCodeEnum.INVALID.getMsg());
     }
 
     /**
@@ -44,7 +44,7 @@ public class JsonResponse<T> {
      * @return
      */
     public static <T> JsonResponse<T> invalid(String msg) {
-        return new JsonResponse<>(JsonResponseCodeEnum.INVAILD.getCode(), msg, null);
+        return new JsonResponse<>(JsonResponseCodeEnum.INVALID.getCode(), msg, null);
     }
 
     /**

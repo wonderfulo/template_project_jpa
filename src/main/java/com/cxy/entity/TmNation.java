@@ -1,5 +1,6 @@
 package com.cxy.entity;
 
+import com.cxy.constant.IsDeleteEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -70,4 +71,58 @@ public class TmNation {
     @Column(name="update_time")
     private Date updateTime;
 
+
+    @Transient
+    private String test;
+
+
+    /**
+     * 对象公用参数基础构建
+     *
+     * @param tmSysUser
+     */
+    public void baseBuild(TmSysUser tmSysUser) {
+        if (this.createUser == null) {
+            this.createUser = tmSysUser.getSysUserId();
+            this.createTime = new Date();
+        }
+        this.updateUser = tmSysUser.getSysUserId();
+        this.updateTime = new Date();
+    }
+
+    /**
+     * 对象公用参数创建构建
+     *
+     * @param tmSysUser
+     */
+    public void createBuild(TmSysUser tmSysUser) {
+        this.appId = tmSysUser.getAppId();
+        this.isDelete = IsDeleteEnum.FALSE.getValue();
+        this.createUser = tmSysUser.getSysUserId();
+        this.createTime = new Date();
+        this.updateUser = tmSysUser.getSysUserId();
+        this.updateTime = new Date();
+    }
+
+    /**
+     * 对象公用参数修改构建
+     *
+     * @param tmSysUser
+     */
+    public void updateBuild(TmSysUser tmSysUser) {
+        this.updateUser = tmSysUser.getSysUserId();
+        this.updateTime = new Date();
+    }
+
+
+    /**
+     * 对象公用参数删除构建
+     *
+     * @param tmSysUser
+     */
+    public void delBuild(TmSysUser tmSysUser) {
+        this.isDelete = IsDeleteEnum.TRUE.getValue();
+        this.updateUser = tmSysUser.getSysUserId();
+        this.updateTime = new Date();
+    }
 }

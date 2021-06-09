@@ -2,9 +2,6 @@ package com.cxy.constant;
 
 /**
  * json返回编码枚举
- *
- * @author lichaofeng
- * @date 2019/09/05
  */
 public enum JsonResponseCodeEnum {
 
@@ -21,7 +18,7 @@ public enum JsonResponseCodeEnum {
     /**
      * 失败code
      */
-    INVAILD(1001, "token失效");
+    INVALID(1001, "token失效");
 
 	/**
 	 * 返回编码

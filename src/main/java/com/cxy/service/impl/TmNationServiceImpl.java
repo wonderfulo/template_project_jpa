@@ -4,6 +4,9 @@ import com.cxy.entity.TmNation;
 import com.cxy.repository.TmNationRepository;
 import com.cxy.service.ITmNationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,7 +28,23 @@ public class TmNationServiceImpl implements ITmNationService {
     private TmNationRepository tmNationRepository;
 
     @Override
-    public List<TmNation> findByNationId(Long nationId) {
-        return tmNationRepository.findByNationIdAndIsDelete(nationId, isDelete);
+    public TmNation findByNationId(Long nationId) {
+        return tmNationRepository.findFirstByNationIdAndIsDelete(nationId, isDelete);
+    }
+
+    @Override
+    public TmNation saveAndFlush(TmNation tmNation) {
+        return tmNationRepository.saveAndFlush(tmNation);
+    }
+
+
+    @Override
+    public Page<TmNation> findByIsDelete(Integer isDelete, Pageable pageable) {
+        return tmNationRepository.findByIsDelete(isDelete, pageable);
+    }
+
+    @Override
+    public Page<TmNation> findPage(Integer isDelete, Pageable pageable) {
+        return tmNationRepository.findPage(isDelete, pageable);
     }
 }
