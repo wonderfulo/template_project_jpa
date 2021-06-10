@@ -1,5 +1,6 @@
 package com.cxy.service.impl;
 
+import com.cxy.constant.IsDeleteEnum;
 import com.cxy.entity.TmNation;
 import com.cxy.repository.TmNationRepository;
 import com.cxy.service.ITmNationService;
@@ -22,14 +23,12 @@ import java.util.List;
 @Service
 public class TmNationServiceImpl implements ITmNationService {
 
-    public static final Integer isDelete = 0;
-
     @Autowired
     private TmNationRepository tmNationRepository;
 
     @Override
     public TmNation findByNationId(Long nationId) {
-        return tmNationRepository.findFirstByNationIdAndIsDelete(nationId, isDelete);
+        return tmNationRepository.findFirstByNationIdAndIsDelete(nationId, IsDeleteEnum.FALSE.getValue());
     }
 
     @Override
@@ -44,7 +43,12 @@ public class TmNationServiceImpl implements ITmNationService {
     }
 
     @Override
-    public Page<TmNation> findPage(Integer isDelete, Pageable pageable) {
-        return tmNationRepository.findPage(isDelete, pageable);
+    public Page<TmNation> findPageByAttr(Integer isDelete, Pageable pageable) {
+        return tmNationRepository.findPageByAttr(isDelete, pageable);
+    }
+
+    @Override
+    public Page<TmNation> findPageEntity(TmNation tmNation, Pageable pageable) {
+        return tmNationRepository.findPageEntity(tmNation, pageable);
     }
 }

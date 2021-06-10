@@ -14,10 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.JpaSort;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -127,7 +129,15 @@ public class TmNationController {
             pageNumber = pageNumber - 1;
         }
 
-        Page<TmNation> tmNationPage = tmNationService.findPage(tmNation.getIsDelete(), PageRequest.of(pageNumber, pageSize));
+        //正序
+//        Page<TmNation> tmNationPage = tmNationService.findPageEntity(tmNation, PageRequest.of(pageNumber, pageSize,Sort.by("nation_id")));
+        //倒叙
+//        Page<TmNation> tmNationPage = tmNationService.findPageEntity(tmNation, PageRequest.of(pageNumber, pageSize,Sort.by(Sort.Direction.DESC,"nation_id")));
+        //多列倒序
+        ArrayList<Sort.Order> orders = new ArrayList<>();
+        orders.add(new Sort.Order(Sort.Direction.DESC, "app_id"));
+        orders.add(new Sort.Order(Sort.Direction.DESC, "nation_id"));
+        Page<TmNation> tmNationPage = tmNationService.findPageEntity(tmNation, PageRequest.of(pageNumber, pageSize,Sort.by(orders)));
         return JsonResponse.success(tmNationPage);
     }
 
