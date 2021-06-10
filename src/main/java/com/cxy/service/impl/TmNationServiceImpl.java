@@ -5,12 +5,12 @@ import com.cxy.entity.TmNation;
 import com.cxy.repository.TmNationRepository;
 import com.cxy.service.ITmNationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * <p>
@@ -48,7 +48,25 @@ public class TmNationServiceImpl implements ITmNationService {
     }
 
     @Override
-    public Page<TmNation> findPageEntity(TmNation tmNation, Pageable pageable) {
-        return tmNationRepository.findPageEntity(tmNation, pageable);
+    public Page<TmNation> findPageByEntity(TmNation tmNation, Pageable pageable) {
+        return tmNationRepository.findPageByEntity(tmNation, pageable);
+    }
+
+    @Override
+    public Page<TmNation> findPageByExample(TmNation tmNation, Pageable pageable) {
+        //包含
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withMatcher("nationName", ExampleMatcher.GenericPropertyMatchers.contains());
+//        //开头
+//        ExampleMatcher matcher = ExampleMatcher.matching()
+//                .withMatcher("nationName", ExampleMatcher.GenericPropertyMatchers.startsWith());
+//        //结尾
+//        ExampleMatcher matcher = ExampleMatcher.matching()
+//                .withMatcher("nationName", ExampleMatcher.GenericPropertyMatchers.endsWith());
+
+        Example<TmNation> example = Example.of(tmNation,matcher);
+//        List<TmNation> all = tmNationRepository.findAll(example);
+        return tmNationRepository.findAll(example, pageable);
+//        return null;
     }
 }

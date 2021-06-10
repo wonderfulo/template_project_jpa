@@ -26,6 +26,6 @@ public interface TmNationRepository extends JpaRepository<TmNation, Long> {
     @Query(value = "select * from tm_nation  where is_delete = :#{#tmNation.isDelete}",
             countQuery = "select count(*) from tm_nation  where is_delete = :#{#tmNation.isDelete}",
             nativeQuery = true)
-    Page<TmNation> findPageEntity(@Param("tmNation") TmNation tmNation, Pageable pageable);
+    Page<TmNation> findPageByEntity(@Param("tmNation") TmNation tmNation, Pageable pageable);
 
 }

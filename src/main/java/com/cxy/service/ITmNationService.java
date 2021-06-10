@@ -30,5 +30,13 @@ public interface ITmNationService {
 
     Page<TmNation> findPageByAttr(Integer isDelete, Pageable pageable);
 
-    Page<TmNation> findPageEntity(TmNation tmNation, Pageable pageable);
+    Page<TmNation> findPageByEntity(TmNation tmNation, Pageable pageable);
+
+    /**
+     * 通过对象动态属性查询
+     * @param tmNation
+     * @param pageable
+     * @return
+     */
+    Page<TmNation> findPageByExample(TmNation tmNation, Pageable pageable);
 }

@@ -130,14 +130,18 @@ public class TmNationController {
         }
 
         //正序
-//        Page<TmNation> tmNationPage = tmNationService.findPageEntity(tmNation, PageRequest.of(pageNumber, pageSize,Sort.by("nation_id")));
+//        Page<TmNation> tmNationPage = tmNationService.findPageByEntity(tmNation, PageRequest.of(pageNumber, pageSize,Sort.by("nation_id")));
         //倒叙
-//        Page<TmNation> tmNationPage = tmNationService.findPageEntity(tmNation, PageRequest.of(pageNumber, pageSize,Sort.by(Sort.Direction.DESC,"nation_id")));
+//        Page<TmNation> tmNationPage = tmNationService.findPageByEntity(tmNation, PageRequest.of(pageNumber, pageSize,Sort.by(Sort.Direction.DESC,"nation_id")));
         //多列倒序
-        ArrayList<Sort.Order> orders = new ArrayList<>();
-        orders.add(new Sort.Order(Sort.Direction.DESC, "app_id"));
-        orders.add(new Sort.Order(Sort.Direction.DESC, "nation_id"));
-        Page<TmNation> tmNationPage = tmNationService.findPageEntity(tmNation, PageRequest.of(pageNumber, pageSize,Sort.by(orders)));
+//        ArrayList<Sort.Order> orders = new ArrayList<>();
+//        orders.add(new Sort.Order(Sort.Direction.DESC, "app_id"));
+//        orders.add(new Sort.Order(Sort.Direction.DESC, "nation_id"));
+//        Page<TmNation> tmNationPage = tmNationService.findPageByEntity(tmNation, PageRequest.of(pageNumber, pageSize,Sort.by(orders)));
+
+        //通过example查询实体
+        //jpa的bug，这里只能传递驼峰命名方式
+        Page<TmNation> tmNationPage = tmNationService.findPageByExample(tmNation, PageRequest.of(pageNumber, pageSize,Sort.by("nationId")));
         return JsonResponse.success(tmNationPage);
     }
 

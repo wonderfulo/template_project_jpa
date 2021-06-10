@@ -22,6 +22,7 @@ public class TmNation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="nation_id")
     private Long nationId;
 
     @Column(name="nation_name")
