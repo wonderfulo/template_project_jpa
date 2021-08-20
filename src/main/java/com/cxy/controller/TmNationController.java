@@ -141,7 +141,11 @@ public class TmNationController {
 
         //通过example查询实体
         //jpa的bug，这里只能传递驼峰命名方式
-        Page<TmNation> tmNationPage = tmNationService.findPageByExample(tmNation, PageRequest.of(pageNumber, pageSize,Sort.by("nationId")));
+//        Page<TmNation> tmNationPage = tmNationService.findPageByExample(tmNation, PageRequest.of(pageNumber, pageSize,Sort.by("nationId")));
+
+
+        //动态sql查询
+        Page<TmNation> tmNationPage = tmNationService.findPageByDynamicSql(tmNation, PageRequest.of(pageNumber, pageSize,Sort.by("nationId")));
         return JsonResponse.success(tmNationPage);
     }
 

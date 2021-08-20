@@ -39,4 +39,15 @@ public interface ITmNationService {
      * @return
      */
     Page<TmNation> findPageByExample(TmNation tmNation, Pageable pageable);
+
+    /**
+     * 动态sql查询
+     * @param tmNation
+     * @param pageable
+     * @return
+     */
+    Page<TmNation> findPageByDynamicSql(TmNation tmNation, Pageable pageable);
+
+
+    List<TmNation> findByNationIdIn(List<Long> nationIds);
 }

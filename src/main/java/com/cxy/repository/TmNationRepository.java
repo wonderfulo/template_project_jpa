@@ -4,16 +4,19 @@ import com.cxy.entity.TmNation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author 陈翔宇
  * @since 2020-12-10
  */
 @Repository
-public interface TmNationRepository extends JpaRepository<TmNation, Long> {
+public interface TmNationRepository extends JpaRepository<TmNation, Long> , JpaSpecificationExecutor<TmNation> {
     TmNation findFirstByNationIdAndIsDelete(Long nationId, Integer isDelete);
 
     Page<TmNation> findByIsDelete(Integer isDelete, Pageable pageable);
@@ -27,5 +30,7 @@ public interface TmNationRepository extends JpaRepository<TmNation, Long> {
             countQuery = "select count(*) from tm_nation  where is_delete = :#{#tmNation.isDelete}",
             nativeQuery = true)
     Page<TmNation> findPageByEntity(@Param("tmNation") TmNation tmNation, Pageable pageable);
+
+    List<TmNation> findByNationIdIn(List<Long> nationIds);
 
 }
